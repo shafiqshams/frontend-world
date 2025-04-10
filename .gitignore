@@ -1,0 +1,14 @@
+# Node.js modules
+node_modules/
+dist/
+build/
+
+# Yarn files
+.yarn/
+
+# Logs
+*.log
+
+# IDE settings
+.vscode/
+.idea/
