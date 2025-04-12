@@ -11,7 +11,12 @@ export const usePosts = () => {
    const fetchPosts = async () => {
       setIsloading(true);
       try {
-         const res = await fetch(`${BASE_URL}/posts}`)
+         const res = await fetch(`${BASE_URL}/posasdts`)
+
+         if (!res.ok) {
+            throw new Error("Http error, cannot fetch successfully")
+         }
+
          const posts = await (res.json()) as Post[]
          setPosts(posts);
       } catch (e) {
