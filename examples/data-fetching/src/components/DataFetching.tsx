@@ -13,38 +13,37 @@ const DataFetching = () => {
    const [isLoading, setIsLoading] = useState<boolean>(false);
    const [error, setError] = useState<Error | null>(null);
 
-   useEffect(() => {
-      const fetchPost = async () => {
-         setIsLoading(true)
+   const fetchPost = async () => {
+      setIsLoading(true)
 
-         try {
-            const response = await fetch(`${BASE_URL}/posts`);
-            const posts = (await response.json()) as Post[]
-            setPosts(posts)
-         } catch (error) {
-            if (error instanceof Error) {
-               setError(error)
-            }
-         } finally {
-            setIsLoading(false)
+      try {
+         const response = await fetch(`${BASE_URL}/posts`);
+         if (!response.ok) {
+            throw new Error("HTTP error, request failed")
          }
-
+         const posts = (await response.json()) as Post[]
+         setPosts(posts)
+      } catch (error) {
+         if (error instanceof Error) {
+            setError(error)
+         } else {
+            setError(new Error("Something went wrong"))
+         }
+      } finally {
+         setIsLoading(false)
       }
 
+   }
+
+   useEffect(() => {
       fetchPost();
    }, [])
-
-   if (isLoading) {
-      return <p>Loading ...</p>
-   }
-
-   if (error) {
-      return <p>Something went wrong</p>
-   }
 
    return (
       <div>
          <h3>Data Fetching</h3>
+         {isLoading && <p>Loading...</p>}
+         {error && <p>{error.message}</p>}
          <ul>
             {posts.map((post) => {
                return <li key={post.id}>{post.title}</li>
