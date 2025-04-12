@@ -1,6 +1,7 @@
 import { usePosts } from "../hooks/usePosts";
 import Error from "./Error";
 import Loading from "./Loading";
+import PostsList from "./PostsList";
 const DataFetching = () => {
 
    const { posts, isLoading, error, refetch } = usePosts();
@@ -15,11 +16,7 @@ const DataFetching = () => {
                <button onClick={refetch}>Retry</button>
             </>
          }
-         <ul>
-            {posts.map((post) => {
-               return <li key={post.id}>{post.title}</li>
-            })}
-         </ul>
+         <PostsList posts={posts} />
       </div>
    )
 }
