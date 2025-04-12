@@ -31,6 +31,6 @@ export const usePosts = () => {
       fetchPosts()
    }, [])
 
-   return { posts, isLoading, error }
+   return { posts, isLoading, error, refetch: fetchPosts }
 
 }
