@@ -23,12 +23,9 @@ const DataFetching = () => {
          }
          const posts = (await response.json()) as Post[]
          setPosts(posts)
-      } catch (error) {
-         if (error instanceof Error) {
-            setError(error)
-         } else {
-            setError(new Error("Something went wrong"))
-         }
+      } catch (e) {
+         const error = e instanceof Error ? e : new Error("Something went wrong");
+         setError(error)
       } finally {
          setIsLoading(false)
       }
