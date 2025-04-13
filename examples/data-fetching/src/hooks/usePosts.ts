@@ -11,7 +11,7 @@ export const usePosts = () => {
    const fetchPosts = async () => {
       setIsloading(true);
       try {
-         const res = await fetch(`${BASE_URL}/posasdts`)
+         const res = await fetch(`${BASE_URL}/posts`)
 
          if (!res.ok) {
             throw new Error("Http error, cannot fetch successfully")
